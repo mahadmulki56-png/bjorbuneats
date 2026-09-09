@@ -15,10 +15,14 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         
         {/* Brand Header */}
         <div className="text-center max-w-2xl mx-auto mb-14 sm:mb-16">
-          <a href="#" className="inline-block mb-3">
-            <span className="font-bubbly text-3xl sm:text-4xl text-[#F2E9D4] tracking-widest uppercase hover:text-[#F2B705] transition-colors">
-              BJORBUN
-            </span>
+          <a href="#home" className="inline-block mb-3">
+            <img
+              src="logo.png"
+              alt="Bjorbun Logo"
+              className="h-[50px] w-auto object-contain mx-auto transition-transform hover:scale-105 duration-200"
+              style={{ height: '50px', width: 'auto', objectFit: 'contain' }}
+              referrerPolicy="no-referrer"
+            />
           </a>
           <p className="text-xs sm:text-sm text-[#F2E9D4]/70 leading-relaxed font-medium">
             Serving freshly grilled, handcrafted burgers made with premium ingredients and bold flavors. Your go-to spot for juicy burgers, crispy fries, and great vibes every day.

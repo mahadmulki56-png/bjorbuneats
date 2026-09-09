@@ -20,6 +20,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOrder, cartCount = 0 }) =>
 
   const scrollToSection = (id: string) => {
     setMobileMenuOpen(false);
+    if (id === 'home') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
     const element = document.getElementById(id);
     if (element) {
       const navOffset = 80;
@@ -42,16 +46,27 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOrder, cartCount = 0 }) =>
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-        {/* Brand Logo */}
-        <a
-          href="#"
-          className="flex items-center gap-2 group cursor-pointer"
-          id="nav-logo"
-        >
-          <span className="font-bubbly text-2xl sm:text-3xl text-[#F2E9D4] tracking-wider uppercase drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)] transition-transform group-hover:scale-105">
-            BJORBUN
-          </span>
-        </a>
+                {/* Brand Logo Container */}
+        <div id="nav-logo-container" className="flex items-center">
+          <a
+            href="#home"
+            id="nav-logo"
+            onClick={(e) => {
+              e.preventDefault();
+              scrollToSection('home');
+            }}
+            className="flex items-center group cursor-pointer"
+          >
+            <img
+              src="/logo.png"
+              alt="Bjorbun Logo"
+              className="h-[50px] w-auto object-contain transition-transform duration-200 group-hover:scale-105"
+              style={{ height: '50px', width: 'auto', objectFit: 'contain' }}
+              referrerPolicy="no-referrer"
+            />
+          </a>
+        </div>
+
 
         {/* Desktop Navigation Links */}
         <nav className="hidden md:flex items-center gap-6 lg:gap-7 text-xs sm:text-sm font-semibold tracking-wider text-[#F2E9D4]/90 uppercase">

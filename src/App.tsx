@@ -15,8 +15,12 @@ import { BackgroundDoodles } from './components/BackgroundDoodles';
 import { BurgerItem, CartItem } from './types';
 import { SIGNATURE_BURGERS } from './data/restaurantData';
 import { ShoppingBag, Check } from 'lucide-react';
+import { useScrollReveal } from './hooks/useScrollReveal';
 
 export default function App() {
+  // Activate subtle fade-in-up scroll reveal for all .organic-container-large elements
+  useScrollReveal('.organic-container-large');
+
   const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [selectedBurger, setSelectedBurger] = useState<BurgerItem | null>(null);

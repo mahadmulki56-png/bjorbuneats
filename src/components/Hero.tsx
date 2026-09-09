@@ -9,7 +9,7 @@ interface HeroProps {
 
 export const Hero: React.FC<HeroProps> = ({ onReserveClick, onExploreMenu }) => {
   return (
-    <section className="relative pt-24 sm:pt-28 pb-12 overflow-hidden bg-[#0A291B]">
+    <section id="home" className="relative pt-24 sm:pt-28 pb-12 overflow-hidden bg-[#0A291B]">
       {/* Background radial glow */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] sm:w-[750px] sm:h-[750px] rounded-full bg-emerald-700/15 blur-[120px] pointer-events-none" />
 
@@ -67,7 +67,7 @@ export const Hero: React.FC<HeroProps> = ({ onReserveClick, onExploreMenu }) => 
       </div>
 
       {/* Main Container */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-20 flex flex-col items-center text-center">
+      <div className="organic-container-large max-w-6xl mx-auto px-4 sm:px-6 relative z-20 flex flex-col items-center text-center">
         
         {/* Top Huge Display Typography: CRAFTED BURGERS */}
         <div className="relative w-full select-none">

@@ -18,14 +18,38 @@
   }
 }
 
-/* Organic Undulating Blob Containers */
+/* Organic Undulating Blob Containers with Subtle Fade-In-Up Scroll Entrance */
 .organic-container-large {
   border-radius: 64px;
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.organic-container-large.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 @media (max-width: 768px) {
   .organic-container-large {
     border-radius: 36px;
+    transform: translateY(18px);
+    transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .organic-container-large.is-visible {
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .organic-container-large {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
   }
 }
 

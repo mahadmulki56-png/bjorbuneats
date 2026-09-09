@@ -13,7 +13,7 @@ export const FindUsSection: React.FC = () => {
   return (
     <section id="find-us" className="py-14 sm:py-20 px-3 sm:px-6 lg:px-8 bg-[#0A291B]">
       {/* Heavily Rounded Organic Cream Container Block */}
-      <div className="max-w-7xl mx-auto bg-[#F2E9D4] text-[#0A291B] rounded-[48px] sm:rounded-[70px] lg:rounded-[80px] p-6 sm:p-12 lg:p-16 shadow-2xl relative overflow-hidden">
+      <div className="organic-container-large max-w-7xl mx-auto bg-[#F2E9D4] text-[#0A291B] rounded-[48px] sm:rounded-[70px] lg:rounded-[80px] p-6 sm:p-12 lg:p-16 shadow-2xl relative overflow-hidden">
         
         {/* Subtle decorative background tints */}
         <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#F2B705]/10 rounded-full blur-3xl pointer-events-none" />

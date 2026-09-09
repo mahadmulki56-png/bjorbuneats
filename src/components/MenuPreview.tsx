@@ -25,7 +25,7 @@ export const MenuPreview: React.FC<MenuPreviewProps> = ({ onSelectItem, onOpenOr
 
   return (
     <section id="menu-preview" className="py-20 sm:py-28 bg-[#0A291B] relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="organic-container-large max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Heading */}
         <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
