@@ -99,8 +99,23 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOrder, cartCount = 0 }) =>
           </button>
         </nav>
 
-        {/* Right CTA Button */}
+        {/* Right CTA Button & Cart Trigger */}
         <div className="flex items-center gap-3">
+          {/* Cart Bag Icon with dynamic item count badge */}
+          <button
+            onClick={onOpenOrder}
+            id="nav-cart-btn"
+            aria-label="View Shopping Bag"
+            className="relative p-2.5 rounded-full bg-[#F2E9D4]/10 hover:bg-[#F2E9D4]/20 text-[#F2E9D4] hover:text-[#F2B705] transition-all cursor-pointer border border-[#F2E9D4]/20 flex items-center justify-center"
+          >
+            <ShoppingBag className="w-5 h-5" />
+            {cartCount > 0 && (
+              <span className="absolute -top-1.5 -right-1.5 bg-[#F2B705] text-[#0A291B] font-bubbly text-[11px] font-extrabold w-5 h-5 rounded-full flex items-center justify-center shadow-md animate-scale">
+                {cartCount}
+              </span>
+            )}
+          </button>
+
           <button
             onClick={onOpenOrder}
             id="nav-order-button"

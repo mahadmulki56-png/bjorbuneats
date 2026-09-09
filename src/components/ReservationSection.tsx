@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ReservationFormData } from '../types';
 import { Calendar, Clock, ChevronDown, CheckCircle2, Utensils, X } from 'lucide-react';
+import { ReservationSuccessModal } from './ReservationSuccessModal';
 
 interface ReservationSectionProps {
   onReservationComplete?: (data: ReservationFormData) => void;
@@ -19,6 +20,7 @@ export const ReservationSection: React.FC<ReservationSectionProps> = ({
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
   const [confirmationCode, setConfirmationCode] = useState('');
 
   const handleChange = (
@@ -33,6 +35,7 @@ export const ReservationSection: React.FC<ReservationSectionProps> = ({
     const code = 'BJB-' + Math.floor(100000 + Math.random() * 900000);
     setConfirmationCode(code);
     setSubmitted(true);
+    setIsSuccessModalOpen(true);
     if (onReservationComplete) {
       onReservationComplete(formData);
     }
@@ -40,6 +43,7 @@ export const ReservationSection: React.FC<ReservationSectionProps> = ({
 
   const handleReset = () => {
     setSubmitted(false);
+    setIsSuccessModalOpen(false);
     setFormData({
       fullName: '',
       email: '',
@@ -304,6 +308,14 @@ export const ReservationSection: React.FC<ReservationSectionProps> = ({
         </div>
 
       </div>
+
+      {/* Interactive High-Converting Reservation Success Modal Popup */}
+      <ReservationSuccessModal
+        isOpen={isSuccessModalOpen}
+        onClose={() => setIsSuccessModalOpen(false)}
+        reservation={formData}
+        confirmationCode={confirmationCode}
+      />
     </section>
   );
 };

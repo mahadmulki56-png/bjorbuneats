@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BurgerItem } from '../types';
+import { BurgerItem, CartItem } from '../types';
 import { X, Plus, Minus, Check, ShoppingBag, Flame, Sparkles } from 'lucide-react';
 
 interface OrderModalProps {
@@ -7,6 +7,7 @@ interface OrderModalProps {
   onClose: () => void;
   selectedBurger: BurgerItem | null;
   onOrderSuccess: (orderSummary: string) => void;
+  onAddToCartItem?: (item: CartItem) => void;
 }
 
 export const OrderModal: React.FC<OrderModalProps> = ({
@@ -14,6 +15,7 @@ export const OrderModal: React.FC<OrderModalProps> = ({
   onClose,
   selectedBurger,
   onOrderSuccess,
+  onAddToCartItem,
 }) => {
   if (!isOpen) return null;
 
@@ -33,6 +35,30 @@ export const OrderModal: React.FC<OrderModalProps> = ({
   const totalPrice = unitPrice * quantity;
 
   const handleConfirmOrder = () => {
+    if (selectedBurger && onAddToCartItem) {
+      const customNotes = [
+        `Size: ${pattySize.toUpperCase()}`,
+        `Spice: ${spiceLevel.toUpperCase()}`,
+        extraCheese ? '+ Extra Cheese' : null,
+        extraBacon ? '+ Extra Bacon' : null,
+      ]
+        .filter(Boolean)
+        .join(', ');
+
+      const cartItem: CartItem = {
+        id: `${selectedBurger.id}-${pattySize}-${extraCheese ? 'ch' : ''}-${extraBacon ? 'bc' : ''}`,
+        name: `${selectedBurger.name} (${pattySize.toUpperCase()})`,
+        price: unitPrice,
+        quantity: quantity,
+        image: selectedBurger.image,
+        category: selectedBurger.category,
+        customization: customNotes,
+      };
+      onAddToCartItem(cartItem);
+      onClose();
+      return;
+    }
+
     setOrderConfirmed(true);
     setTimeout(() => {
       onOrderSuccess(

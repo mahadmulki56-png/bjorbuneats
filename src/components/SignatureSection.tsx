@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
 import { ALL_MENU_ITEMS, CATEGORY_TABS, CategoryType } from '../data/restaurantData';
 import { BurgerItem } from '../types';
-import { Plus } from 'lucide-react';
+import { Plus, ShoppingBag } from 'lucide-react';
 
 interface SignatureSectionProps {
   onSelectBurger: (burger: BurgerItem) => void;
   onGetBurgerClick: () => void;
+  onAddToCart: (item: BurgerItem) => void;
 }
 
 export const SignatureSection: React.FC<SignatureSectionProps> = ({
   onSelectBurger,
   onGetBurgerClick,
+  onAddToCart,
 }) => {
   const [activeTab, setActiveTab] = useState<CategoryType>('burgers');
   const [isFading, setIsFading] = useState(false);
@@ -76,7 +78,7 @@ export const SignatureSection: React.FC<SignatureSectionProps> = ({
               key={item.id}
               id={`burger-card-${item.id}`}
               onClick={() => onSelectBurger(item)}
-              className="group relative flex flex-col items-center cursor-pointer transition-transform duration-300 hover:-translate-y-3"
+              className="group relative flex flex-col items-center cursor-pointer transition-transform duration-300 hover:-translate-y-2"
             >
               {/* Circular Numbered Badge Top-Left */}
               <div className="absolute -top-2 left-6 sm:left-4 z-20 w-16 h-16 sm:w-18 sm:h-18 rounded-full bg-[#F2B705] border-2 border-[#0A291B] flex items-center justify-center shadow-lg group-hover:rotate-12 transition-transform">
@@ -100,38 +102,67 @@ export const SignatureSection: React.FC<SignatureSectionProps> = ({
                 </span>
               </div>
 
-              {/* Food Image Container with Glow */}
-              <div className="relative w-full aspect-square max-w-[280px] sm:max-w-[320px] flex items-center justify-center p-4">
-                {/* Soft glow behind food image */}
-                <div className="absolute inset-4 rounded-full bg-[#F2B705]/10 blur-2xl group-hover:bg-[#F2B705]/20 transition-all duration-300" />
+              {/* Food Image Container with Strict Height & Floating Micro-Animation */}
+              <div className="relative w-full h-[220px] max-h-[220px] flex items-center justify-center p-2 bg-transparent overflow-visible">
+                {/* Soft ambient radial glow behind transparent food PNG */}
+                <div className="absolute inset-4 rounded-full bg-[#F2B705]/15 blur-2xl group-hover:bg-[#F2B705]/25 transition-all duration-300" />
                 
-                {/* Food Image */}
+                {/* Food Image - strictly contained & floating */}
                 <img
                   src={item.image}
                   onError={(e) => {
                     (e.target as HTMLImageElement).src = item.fallbackImage;
                   }}
                   alt={item.name}
-                  className="w-full h-full object-contain relative z-10 drop-shadow-[0_18px_25px_rgba(0,0,0,0.65)] group-hover:scale-110 transition-transform duration-500 ease-out"
+                  style={{
+                    width: '100%',
+                    height: '220px',
+                    objectFit: 'contain',
+                    animation: 'float 4s ease-in-out infinite',
+                  }}
+                  className="relative z-10 drop-shadow-[0_18px_25px_rgba(0,0,0,0.65)] group-hover:scale-105 transition-transform duration-500 ease-out pointer-events-none"
                 />
               </div>
 
               {/* Cream Pill Label with Item Name */}
               <div className="relative -mt-2 z-20 w-full max-w-[280px]">
-                <div className="bg-[#F2E9D4] text-[#0A291B] px-6 py-3.5 rounded-full text-center shadow-[0_8px_20px_rgba(0,0,0,0.3)] border-2 border-[#F2B705]/50 group-hover:bg-[#fffaee] group-hover:border-[#F2B705] transition-all">
+                <div className="bg-[#F2E9D4] text-[#0A291B] px-5 py-3 rounded-full text-center shadow-[0_8px_20px_rgba(0,0,0,0.3)] border-2 border-[#F2B705]/50 group-hover:bg-[#fffaee] group-hover:border-[#F2B705] transition-all">
                   <h3 className="font-bubbly text-base sm:text-lg uppercase tracking-wide truncate">
                     {item.name}
                   </h3>
                 </div>
               </div>
 
-              {/* Subtle hover prompt with price */}
-              <div className="mt-3 flex items-center gap-2 text-xs text-[#F2E9D4]/70 font-semibold group-hover:text-[#F2B705] transition-colors">
-                <span>${item.price.toFixed(2)}</span>
-                <span>•</span>
-                <span className="flex items-center gap-1 underline underline-offset-4">
-                  View Details <Plus className="w-3.5 h-3.5" />
+              {/* Price & Action Buttons */}
+              <div className="mt-3 flex items-center justify-between w-full max-w-[280px] px-2">
+                <span className="font-bubbly text-base text-[#F2B705]">
+                  ${item.price.toFixed(2)}
                 </span>
+                
+                <div className="flex items-center gap-1.5">
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onSelectBurger(item);
+                    }}
+                    className="px-2.5 py-1 rounded-full bg-[#F2E9D4]/15 hover:bg-[#F2E9D4]/25 text-[#F2E9D4] text-[11px] font-bold uppercase tracking-wider transition-colors cursor-pointer"
+                  >
+                    Custom
+                  </button>
+                  <button
+                    type="button"
+                    id={`quick-add-${item.id}`}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onAddToCart(item);
+                    }}
+                    className="px-3 py-1 rounded-full bg-[#F2B705] hover:bg-[#ffc61a] text-[#0A291B] text-[11px] font-bubbly uppercase tracking-wider transition-all active:scale-95 shadow-md flex items-center gap-1 cursor-pointer font-bold"
+                  >
+                    <Plus className="w-3.5 h-3.5 stroke-[3]" />
+                    Add
+                  </button>
+                </div>
               </div>
             </div>
           ))}

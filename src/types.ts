@@ -52,3 +52,14 @@ export interface ReservationFormData {
   time: string;
   specialRequests?: string;
 }
+
+export interface CartItem {
+  id: string;
+  menuItemId?: string;
+  name: string;
+  price: number;
+  quantity: number;
+  image: string;
+  category: 'burgers' | 'sides' | 'desserts' | 'drinks';
+  customization?: string;
+}

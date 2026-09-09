@@ -51,12 +51,25 @@ export const FindUsSection: React.FC = () => {
                 </div>
               </div>
 
-              <h3 className="font-bubbly text-2xl sm:text-3xl text-[#0A291B] uppercase mb-2">
-                Food Stread Districk No.32
-              </h3>
-              <p className="text-xs sm:text-sm text-[#0A291B]/70 font-medium mb-6">
-                Jakarta Selatan, DKI Jakarta 12160 • Corner of Sultan Hasanuddin St.
-              </p>
+              {/* Clickable Google Maps Address Link */}
+              <a
+                href="https://maps.google.com/?q=Food+Street+District+No.32+Jakarta+Selatan"
+                target="_blank"
+                rel="noopener noreferrer"
+                id="main-address-link"
+                className="group block mb-6 transition-transform"
+                title="Open in Google Maps"
+              >
+                <div className="flex items-start justify-between gap-2">
+                  <h3 className="font-bubbly text-2xl sm:text-3xl text-[#0A291B] uppercase group-hover:text-[#12422c] transition-colors flex items-center gap-2">
+                    Food Stread Districk No.32
+                    <ExternalLink className="w-5 h-5 text-[#F2B705] opacity-80 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
+                  </h3>
+                </div>
+                <p className="text-xs sm:text-sm text-[#0A291B]/80 font-medium group-hover:text-[#0A291B] underline decoration-[#F2B705]/60 underline-offset-4 transition-colors mt-1">
+                  Jakarta Selatan, DKI Jakarta 12160 • Corner of Sultan Hasanuddin St.
+                </p>
+              </a>
 
               <div className="flex flex-wrap gap-3">
                 <button
@@ -78,14 +91,14 @@ export const FindUsSection: React.FC = () => {
                 </button>
 
                 <a
-                  href="https://maps.google.com/?q=Food+Street+District+Jakarta"
+                  href="https://maps.google.com/?q=Food+Street+District+No.32+Jakarta+Selatan"
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   id="google-maps-link"
                   className="px-5 py-2.5 rounded-full bg-[#F2B705] text-[#0A291B] font-bubbly text-xs tracking-wider uppercase hover:bg-[#ffc61a] active:scale-95 transition-all flex items-center gap-2 cursor-pointer shadow-sm"
                 >
                   <ExternalLink className="w-3.5 h-3.5" />
-                  GET DIRECTIONS
+                  OPEN IN GOOGLE MAPS
                 </a>
               </div>
             </div>
@@ -126,7 +139,17 @@ export const FindUsSection: React.FC = () => {
                   </h4>
                 </div>
                 <div className="text-xs text-[#0A291B]/80 font-medium space-y-2">
-                  <p className="font-bold text-sm text-[#0A291B]">+62 812-3456-7890</p>
+                  {/* Clickable Phone Number */}
+                  <a
+                    href="tel:+6281234567890"
+                    id="contact-phone-link"
+                    className="inline-flex items-center gap-2 font-bold text-sm sm:text-base text-[#0A291B] hover:text-[#12422c] underline decoration-[#F2B705] decoration-2 underline-offset-4 transition-colors"
+                  >
+                    <span>+62 812-3456-7890</span>
+                    <span className="text-[10px] bg-[#F2B705] text-[#0A291B] font-bubbly uppercase px-2 py-0.5 rounded-full">
+                      TAP TO CALL
+                    </span>
+                  </a>
                   <div className="flex items-center gap-3 pt-1 text-[11px] text-[#0A291B]/70">
                     <span className="flex items-center gap-1">
                       <Car className="w-3 h-3 text-[#0A291B]" /> Free Valet
@@ -161,7 +184,13 @@ export const FindUsSection: React.FC = () => {
           </div>
 
           {/* Right Column: Stylized Visual Map Preview */}
-          <div className="lg:col-span-6 relative min-h-[340px] sm:min-h-[420px] rounded-[36px] overflow-hidden border-4 border-[#0A291B]/15 shadow-xl bg-[#072115]">
+          <a
+            href="https://maps.google.com/?q=Food+Street+District+No.32+Jakarta+Selatan"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Open Food Street District in Google Maps"
+            className="lg:col-span-6 relative min-h-[340px] sm:min-h-[420px] rounded-[36px] overflow-hidden border-4 border-[#0A291B]/15 shadow-xl bg-[#072115] group cursor-pointer block"
+          >
             
             {/* Stylized vector map graphic */}
             <svg
@@ -241,16 +270,18 @@ export const FindUsSection: React.FC = () => {
               </div>
             </div>
 
-            {/* Corner Info Overlay */}
-            <div className="absolute bottom-4 left-4 right-4 z-20 flex items-center justify-between bg-[#0A291B]/85 backdrop-blur-md px-4 py-2.5 rounded-2xl border border-[#F2E9D4]/15 text-[#F2E9D4] text-xs">
+            {/* Corner Info Overlay & Click Prompt */}
+            <div className="absolute bottom-4 left-4 right-4 z-20 flex items-center justify-between bg-[#0A291B]/90 backdrop-blur-md px-4 py-2.5 rounded-2xl border border-[#F2E9D4]/15 text-[#F2E9D4] text-xs">
               <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[#F2B705]" />
+                <span className="w-2 h-2 rounded-full bg-[#F2B705] animate-ping" />
                 <span className="font-semibold">Average Kitchen Prep: 8–12 mins</span>
               </div>
-              <span className="text-[#F2B705] font-bubbly uppercase">Dine-In Ready</span>
+              <span className="text-[#F2B705] font-bubbly uppercase group-hover:underline flex items-center gap-1">
+                OPEN MAP <ExternalLink className="w-3.5 h-3.5" />
+              </span>
             </div>
 
-          </div>
+          </a>
 
         </div>
 

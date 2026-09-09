@@ -10,16 +10,20 @@ import { FindUsSection } from './components/FindUsSection';
 import { ReservationSection } from './components/ReservationSection';
 import { Footer } from './components/Footer';
 import { OrderModal } from './components/OrderModal';
+import { OrderDrawer } from './components/OrderDrawer';
 import { BackgroundDoodles } from './components/BackgroundDoodles';
-import { BurgerItem } from './types';
+import { BurgerItem, CartItem } from './types';
 import { SIGNATURE_BURGERS } from './data/restaurantData';
 import { ShoppingBag, Check } from 'lucide-react';
 
 export default function App() {
   const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
   const [selectedBurger, setSelectedBurger] = useState<BurgerItem | null>(null);
-  const [cartCount, setCartCount] = useState(0);
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+
+  const totalCartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   const showToast = (msg: string) => {
     setToastMessage(msg);
@@ -33,14 +37,82 @@ export default function App() {
     setIsOrderModalOpen(true);
   };
 
-  const handleOrderSuccess = (orderSummary: string) => {
-    setCartCount((prev) => prev + 1);
-    showToast(`Added to Order: ${orderSummary}`);
+  const handleAddToCart = (burger: BurgerItem) => {
+    setCartItems((prev) => {
+      const existingIndex = prev.findIndex((i) => i.id === burger.id);
+      if (existingIndex > -1) {
+        const updated = [...prev];
+        updated[existingIndex].quantity += 1;
+        return updated;
+      }
+      return [
+        ...prev,
+        {
+          id: burger.id,
+          name: burger.name,
+          price: burger.price,
+          quantity: 1,
+          image: burger.image,
+          category: burger.category,
+        },
+      ];
+    });
+    setIsCartOpen(true);
+    showToast(`Added ${burger.name} to order bag!`);
+  };
+
+  const handleAddToCartItem = (item: CartItem) => {
+    setCartItems((prev) => {
+      const existingIndex = prev.findIndex((i) => i.id === item.id);
+      if (existingIndex > -1) {
+        const updated = [...prev];
+        updated[existingIndex].quantity += item.quantity;
+        return updated;
+      }
+      return [...prev, item];
+    });
+    setIsCartOpen(true);
+    showToast(`Added ${item.name} to order bag!`);
+  };
+
+  const handleUpdateQuantity = (id: string, delta: number) => {
+    setCartItems((prev) =>
+      prev
+        .map((item) => {
+          if (item.id === id) {
+            const newQty = item.quantity + delta;
+            return newQty > 0 ? { ...item, quantity: newQty } : null;
+          }
+          return item;
+        })
+        .filter((item): item is CartItem => item !== null)
+    );
+  };
+
+  const handleRemoveItem = (id: string) => {
+    setCartItems((prev) => prev.filter((item) => item.id !== id));
+  };
+
+  const handleClearCart = () => {
+    setCartItems([]);
+  };
+
+  const handleCheckout = () => {
+    showToast('Order confirmed! Our kitchen is preparing your feast now.');
+    setCartItems([]);
+    setIsCartOpen(false);
   };
 
   const handleQuickAdd = (item: { name: string; price: number }) => {
-    setCartCount((prev) => prev + 1);
-    showToast(`Added ${item.name} ($${item.price.toFixed(2)})`);
+    const quickItem: CartItem = {
+      id: `quick-${item.name.toLowerCase().replace(/[^a-z0-9]/g, '-')}`,
+      name: item.name,
+      price: item.price,
+      quantity: 1,
+      image: 'https://pngimg.com/d/burger_sandwich_PNG4114.png',
+      category: 'burgers',
+    };
+    handleAddToCartItem(quickItem);
   };
 
   const scrollToSection = (id: string) => {
@@ -62,7 +134,7 @@ export default function App() {
       <BackgroundDoodles />
 
       {/* Main Navigation Bar */}
-      <Navbar onOpenOrder={() => handleOpenOrder()} cartCount={cartCount} />
+      <Navbar onOpenOrder={() => setIsCartOpen(true)} cartCount={totalCartCount} />
 
       <main className="relative z-10">
         {/* 1. Hero Section */}
@@ -75,6 +147,7 @@ export default function App() {
         <SignatureSection
           onSelectBurger={(burger) => handleOpenOrder(burger)}
           onGetBurgerClick={() => scrollToSection('reservation')}
+          onAddToCart={handleAddToCart}
         />
 
         {/* 3. New Section: About Our Kitchen (Wrapped in Organic Cream Container) */}
@@ -86,7 +159,7 @@ export default function App() {
         {/* 5. Menu Preview Section */}
         <MenuPreview
           onSelectItem={handleQuickAdd}
-          onOpenOrder={() => handleOpenOrder()}
+          onOpenOrder={() => setIsCartOpen(true)}
         />
 
         {/* 6. Testimonials Section ("WHAT OUR CUSTOMERS SAY") */}
@@ -98,7 +171,7 @@ export default function App() {
         {/* 8. Reservation Form Section ("COME ENJOY WITH US") */}
         <ReservationSection
           onReservationComplete={(data) => {
-            showToast(`Table booked for ${data.fullName}!`);
+            showToast(`Table reserved for ${data.fullName}!`);
           }}
         />
       </main>
@@ -107,15 +180,15 @@ export default function App() {
       <Footer onNavigate={scrollToSection} />
 
       {/* Floating Order Cart Quick Launcher */}
-      {cartCount > 0 && (
+      {totalCartCount > 0 && (
         <div className="fixed bottom-6 right-6 z-40 animate-bounce">
           <button
-            onClick={() => handleOpenOrder()}
+            onClick={() => setIsCartOpen(true)}
             id="floating-cart-button"
             className="flex items-center gap-2.5 px-5 py-3 rounded-full bg-[#F2B705] text-[#0A291B] font-bubbly text-sm uppercase shadow-[0_8px_25px_rgba(242,183,5,0.5)] hover:scale-105 active:scale-95 transition-all cursor-pointer border-2 border-[#0A291B]"
           >
             <ShoppingBag className="w-4 h-4" />
-            <span>Bag ({cartCount})</span>
+            <span>Bag ({totalCartCount})</span>
           </button>
         </div>
       )}
@@ -130,13 +203,26 @@ export default function App() {
         </div>
       )}
 
+      {/* Slide-out Order Cart Drawer */}
+      <OrderDrawer
+        isOpen={isCartOpen}
+        onClose={() => setIsCartOpen(false)}
+        items={cartItems}
+        onUpdateQuantity={handleUpdateQuantity}
+        onRemoveItem={handleRemoveItem}
+        onClearCart={handleClearCart}
+        onCheckout={handleCheckout}
+      />
+
       {/* Interactive Order / Customization Modal */}
       <OrderModal
         isOpen={isOrderModalOpen}
         onClose={() => setIsOrderModalOpen(false)}
         selectedBurger={selectedBurger}
-        onOrderSuccess={handleOrderSuccess}
+        onOrderSuccess={(summary) => showToast(`Added to order: ${summary}`)}
+        onAddToCartItem={handleAddToCartItem}
       />
     </div>
   );
 }
+
