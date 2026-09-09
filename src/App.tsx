@@ -10,7 +10,7 @@ import { FindUsSection } from './components/FindUsSection';
 import { ReservationSection } from './components/ReservationSection';
 import { Footer } from './components/Footer';
 import { OrderModal } from './components/OrderModal';
-import { OrderDrawer } from './components/OrderDrawer';
+import { CartDrawer, CustomerOrderDetails } from './components/CartDrawer';
 import { BackgroundDoodles } from './components/BackgroundDoodles';
 import { BurgerItem, CartItem } from './types';
 import { SIGNATURE_BURGERS } from './data/restaurantData';
@@ -208,14 +208,16 @@ export default function App() {
       )}
 
       {/* Slide-out Order Cart Drawer */}
-      <OrderDrawer
+      <CartDrawer
         isOpen={isCartOpen}
         onClose={() => setIsCartOpen(false)}
         items={cartItems}
         onUpdateQuantity={handleUpdateQuantity}
         onRemoveItem={handleRemoveItem}
         onClearCart={handleClearCart}
-        onCheckout={handleCheckout}
+        onSubmitOrder={(order: CustomerOrderDetails) => {
+          showToast(`Order #${order.orderId} received for ${order.name}!`);
+        }}
       />
 
       {/* Interactive Order / Customization Modal */}
