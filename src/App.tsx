@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { SignatureSection } from './components/SignatureSection';
@@ -11,6 +11,7 @@ import { ReservationSection } from './components/ReservationSection';
 import { Footer } from './components/Footer';
 import { OrderModal } from './components/OrderModal';
 import { CartDrawer, CustomerOrderDetails } from './components/CartDrawer';
+import { Preloader } from './components/Preloader';
 import { BackgroundDoodles } from './components/BackgroundDoodles';
 import { BurgerItem, CartItem } from './types';
 import { SIGNATURE_BURGERS } from './data/restaurantData';
@@ -21,11 +22,21 @@ export default function App() {
   // Activate subtle fade-in-up scroll reveal for all .organic-container-large elements
   useScrollReveal('.organic-container-large');
 
+  const [isLoading, setIsLoading] = useState(true);
   const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [selectedBurger, setSelectedBurger] = useState<BurgerItem | null>(null);
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+
+  // Dynamic 2.5-second preloader timer
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2500);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const totalCartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
@@ -134,6 +145,9 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#0A291B] text-[#F2E9D4] relative selection:bg-[#F2B705] selection:text-[#0A291B]">
+      {/* 0. Full-Screen Premium Preloader Overlay */}
+      <Preloader isLoading={isLoading} />
+
       {/* Background Watermark Food Doodles */}
       <BackgroundDoodles />
 
