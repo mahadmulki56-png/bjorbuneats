@@ -1,0 +1,178 @@
+import React, { useState, useEffect } from 'react';
+import { Menu, X, UtensilsCrossed, PhoneCall, ShoppingBag } from 'lucide-react';
+
+interface NavbarProps {
+  onOpenOrder: () => void;
+  cartCount?: number;
+}
+
+export const Navbar: React.FC<NavbarProps> = ({ onOpenOrder, cartCount = 0 }) => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToSection = (id: string) => {
+    setMobileMenuOpen(false);
+    const element = document.getElementById(id);
+    if (element) {
+      const navOffset = 80;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - navOffset;
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth',
+      });
+    }
+  };
+
+  return (
+    <header
+      id="main-navbar"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled
+          ? 'bg-[#0A291B]/90 backdrop-blur-md py-3 shadow-lg shadow-black/20 border-b border-[#F2E9D4]/10'
+          : 'bg-transparent py-5'
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+        {/* Brand Logo */}
+        <a
+          href="#"
+          className="flex items-center gap-2 group cursor-pointer"
+          id="nav-logo"
+        >
+          <span className="font-bubbly text-2xl sm:text-3xl text-[#F2E9D4] tracking-wider uppercase drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)] transition-transform group-hover:scale-105">
+            BJORBUN
+          </span>
+        </a>
+
+        {/* Desktop Navigation Links */}
+        <nav className="hidden md:flex items-center gap-6 lg:gap-7 text-xs sm:text-sm font-semibold tracking-wider text-[#F2E9D4]/90 uppercase">
+          <button
+            onClick={() => scrollToSection('signature')}
+            className="hover:text-[#F2B705] transition-colors py-1 cursor-pointer hover:underline underline-offset-8"
+            id="nav-link-signature"
+          >
+            MENU
+          </button>
+          <button
+            onClick={() => scrollToSection('kitchen')}
+            className="hover:text-[#F2B705] transition-colors py-1 cursor-pointer hover:underline underline-offset-8"
+            id="nav-link-kitchen"
+          >
+            KITCHEN
+          </button>
+          <button
+            onClick={() => scrollToSection('features')}
+            className="hover:text-[#F2B705] transition-colors py-1 cursor-pointer hover:underline underline-offset-8"
+            id="nav-link-features"
+          >
+            SERVICES
+          </button>
+          <button
+            onClick={() => scrollToSection('testimonials')}
+            className="hover:text-[#F2B705] transition-colors py-1 cursor-pointer hover:underline underline-offset-8"
+            id="nav-link-testimonials"
+          >
+            TESTIMONIAL
+          </button>
+          <button
+            onClick={() => scrollToSection('find-us')}
+            className="hover:text-[#F2B705] transition-colors py-1 cursor-pointer hover:underline underline-offset-8"
+            id="nav-link-find-us"
+          >
+            FIND US
+          </button>
+          <button
+            onClick={() => scrollToSection('reservation')}
+            className="hover:text-[#F2B705] transition-colors py-1 cursor-pointer hover:underline underline-offset-8"
+            id="nav-link-reservation"
+          >
+            BOOK TABLE
+          </button>
+        </nav>
+
+        {/* Right CTA Button */}
+        <div className="flex items-center gap-3">
+          <button
+            onClick={onOpenOrder}
+            id="nav-order-button"
+            className="hidden sm:inline-flex items-center justify-center px-6 py-2.5 rounded-full bg-[#F2B705] text-[#0A291B] font-bubbly text-sm tracking-wider uppercase shadow-[0_4px_14px_rgba(242,183,5,0.4)] hover:bg-[#ffc61a] hover:scale-105 active:scale-95 transition-all cursor-pointer"
+          >
+            ORDER NOW
+          </button>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            id="nav-mobile-toggle"
+            aria-label="Toggle Navigation Menu"
+            className="md:hidden p-2 text-[#F2E9D4] hover:text-[#F2B705] focus:outline-none"
+          >
+            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Menu Dropdown */}
+      {mobileMenuOpen && (
+        <div className="md:hidden bg-[#0A291B]/95 backdrop-blur-lg border-b border-[#F2E9D4]/15 px-6 py-6 space-y-4">
+          <button
+            onClick={() => scrollToSection('signature')}
+            className="block w-full text-left text-base font-semibold uppercase text-[#F2E9D4] hover:text-[#F2B705]"
+          >
+            MENU
+          </button>
+          <button
+            onClick={() => scrollToSection('kitchen')}
+            className="block w-full text-left text-base font-semibold uppercase text-[#F2E9D4] hover:text-[#F2B705]"
+          >
+            KITCHEN
+          </button>
+          <button
+            onClick={() => scrollToSection('features')}
+            className="block w-full text-left text-base font-semibold uppercase text-[#F2E9D4] hover:text-[#F2B705]"
+          >
+            SERVICES
+          </button>
+          <button
+            onClick={() => scrollToSection('testimonials')}
+            className="block w-full text-left text-base font-semibold uppercase text-[#F2E9D4] hover:text-[#F2B705]"
+          >
+            TESTIMONIAL
+          </button>
+          <button
+            onClick={() => scrollToSection('find-us')}
+            className="block w-full text-left text-base font-semibold uppercase text-[#F2E9D4] hover:text-[#F2B705]"
+          >
+            FIND US
+          </button>
+          <button
+            onClick={() => scrollToSection('reservation')}
+            className="block w-full text-left text-base font-semibold uppercase text-[#F2E9D4] hover:text-[#F2B705]"
+          >
+            BOOK TABLE
+          </button>
+          <div className="pt-2">
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                onOpenOrder();
+              }}
+              className="w-full py-3 rounded-full bg-[#F2B705] text-[#0A291B] font-bubbly text-base tracking-wider uppercase shadow-md"
+            >
+              ORDER NOW
+            </button>
+          </div>
+        </div>
+      )}
+    </header>
+  );
+};

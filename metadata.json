@@ -1,0 +1,6 @@
+{
+  "name": "Bjorbun Burgers",
+  "description": "Boutique artisanal burger restaurant featuring crafted organic burgers, signature drip stacks, and online table reservations.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
