@@ -61,7 +61,7 @@ export const ALL_MENU_ITEMS: BurgerItem[] = [
     description: 'Hand-pressed Angus beef patty topped with bubbling Swiss Gruyère, slow-braised wild forest mushrooms, crispy shallots, and rich black truffle garlic aioli on artisan brioche.',
     price: 15.80,
     badgeNumber: 4,
-    image: 'https://pngimg.com/d/burger_sandwich_PNG4124.png',
+    image: 'drip-stack.png',
     fallbackImage: 'https://pngimg.com/d/burger_sandwich_PNG4114.png',
     ingredients: ['Angus Beef', 'Swiss Gruyère', 'Wild Mushrooms', 'Black Truffle Aioli', 'Brioche Bun'],
     calories: '820 kcal',
