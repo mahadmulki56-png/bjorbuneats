@@ -19,7 +19,7 @@ export const ALL_MENU_ITEMS: BurgerItem[] = [
     description: 'Double Angus smashed patties overflowing with molten warm cheddar lava, applewood smoked bacon ribbons, crispy shallots, and house garlic butter glaze on toasted brioche.',
     price: 14.50,
     badgeNumber: 1,
-    image: 'https://pngimg.com/d/burger_sandwich_PNG4114.png',
+    image: 'cheese-lava-beast.png',
     fallbackImage: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80',
     ingredients: ['Double Angus Beef', 'Smoked Cheddar Lava', 'Applewood Bacon', 'Caramelized Onion', 'Artisan Brioche'],
     calories: '890 kcal',
