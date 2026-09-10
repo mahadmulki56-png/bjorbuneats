@@ -183,6 +183,20 @@ export const ALL_MENU_ITEMS: BurgerItem[] = [
     calories: '150 kcal',
     isPopular: true,
   },
+  {
+    id: 'cherry-cream-soda',
+    name: 'WILD CHERRY CREAM SODA',
+    category: 'drinks',
+    tagline: 'Sweet black cherry reduction with a smooth splash of vanilla cream',
+    description: 'A rich, nostalgic burger-lounge favorite. Bubbly craft soda blending sweet dark black cherry reduction, sparkling spring water, and a smooth float of real Madagascar vanilla cream over pebble ice.',
+    price: 4.80,
+    badgeNumber: 5, // Make sure to increment this number based on your items list count!
+    image: '/cherry-creamsoda.png', // Or use "/cherry-creamsoda.png.png" if AI studio gives you the double extension bug
+    fallbackImage: 'https://pngimg.com',
+    ingredients: ['Black Cherry Reduction', 'Madagascar Vanilla Cream', 'Sparkling Spring Water', 'Pebble Ice'],
+    calories: '160 kcal',
+    isPopular: false,
+  },
 
   // --- 4. DESSERTS (4 items) ---
   {
