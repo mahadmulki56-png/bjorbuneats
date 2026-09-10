@@ -67,7 +67,20 @@ export const ALL_MENU_ITEMS: BurgerItem[] = [
     calories: '820 kcal',
     isPopular: true,
   },
-
+ {
+    id: 'cheddar-volcano', // <-- Type your clean, unique lowercase item ID here
+    name: 'CHEDDAR VOLCANO', // <-- Type your eye-catching burger title here
+    category: 'burgers',
+    tagline: 'Molten smoked cheddar downpour with crispy maple beef bacon',
+    description: 'The ultimate cheese showstopper. Thick-cut seared Angus beef patty, stacked with extra-crispy maple-smoked bacon ribbons, crunchy flash-fried jalapeño coins, completely smothered in a dramatic cascading downpour of warm molten artisan white cheddar queso on a toasted glossy brioche.',
+    price: 16.50,
+    badgeNumber: 5, // Set to 5 since it is the fifth burger in your array catalog list!
+    image: '/cheddar-volcano.png', // Change to "/cheddar-volcano.png.png" if the double extension happens!
+    fallbackImage: 'https://pngimg.com',
+    ingredients: ['Seared Angus Beef', 'Cascading Cheddar Queso', 'Maple Bacon Ribbons', 'Fried Jalapeños', 'Glossy Brioche'],
+    calories: '980 kcal',
+    isPopular: true,
+  },
   // --- 2. SIDES (4 items) ---
   {
     id: 'truffle-parmesan-fries',
