@@ -32,7 +32,7 @@ export const AboutKitchenSection: React.FC = () => {
           <div className="lg:col-span-5 flex flex-col items-center">
             <div className="relative w-full max-w-md aspect-square rounded-[36px] overflow-hidden shadow-2xl border-4 border-[#0A291B]/10 group">
               <img
-                src="https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=800&q=80"
+                src="/kitchen-hero.jpeg"
                 alt="Chef preparing artisanal burgers"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
