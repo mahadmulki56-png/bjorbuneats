@@ -39,21 +39,21 @@ export const ALL_MENU_ITEMS: BurgerItem[] = [
     calories: '940 kcal',
     isPopular: true,
   },
-  {
-    id: 'smoky-black-bun',
-    name: 'SMOKY BLACK BUN',
+    {
+    id: 'smoky-maple-stack',
+    name: 'SMOKY MAPLE STACK',
     category: 'burgers',
-    tagline: 'Activated charcoal bun with slow-smoked brisket blend',
-    description: 'Gourmet activated charcoal black brioche bun packed with 12-hour oak-smoked brisket patty, aged gouda, charred jalapenos, and rich chipotle aioli with crunchy onion rings.',
-    price: 17.50,
+    tagline: 'Aged white cheddar with thick maple-glazed beef bacon ribbons',
+    description: 'A masterpiece of sweet and savory layers. Smashed brisket-blend beef patties topped with bubbling aged white cheddar, crispy fried onion straw nests, and thick-cut wavy beef bacon ribbons glazed in pure organic maple syrup, finished with a hit of smoky campfire sauce on a toasted potato bun.',
+    price: 15.20,
     badgeNumber: 3,
-    image: 'https://pngimg.com/d/burger_sandwich_PNG4133.png',
-    fallbackImage: 'https://images.unsplash.com/photo-1520072959219-c595dc870360?auto=format&fit=crop&w=800&q=80',
-    ingredients: ['Charcoal Black Bun', 'Oak-Smoked Brisket', 'Aged Gouda', 'Chipotle Aioli', 'Fried Onion Straws'],
-    calories: '860 kcal',
+    image: '/maple-stack.png',
+    fallbackImage: 'https://pngimg.com',
+    ingredients: ['Brisket Blend Patties', 'Maple Beef Bacon', 'Aged White Cheddar', 'Crispy Onion Straws', 'Potato Bun'],
+    calories: '880 kcal',
     isPopular: true,
   },
-  {
+   {
     id: 'truffle-swiss-crunch',
     name: 'TRUFFLE SWISS CRUNCH',
     category: 'burgers',
@@ -268,6 +268,35 @@ export const ALL_MENU_ITEMS: BurgerItem[] = [
     calories: '460 kcal',
     isPopular: true,
   },
+  {
+    id: 'loaded-nutella-waffle-pops',
+    name: 'LOADED NUTELLA WAFFLE POPS',
+    category: 'desserts',
+    tagline: 'Crisp grid waffle drenched in warm Nutella and candy crunch',
+    description: 'A colorful, high-contrast dessert showstopper. A crisp, golden Belgian grid waffle served on a stick, completely drenched in a rich gloss layer of warm hazelnut Nutella, criss-crossed with white chocolate ribbon drizzles, and loaded with a crunch layer of crushed colorful M&M candies.',
+    price: 6.80,
+    badgeNumber: 5, // Positioned as the fifth elite choice in your dessert array loop
+    image: '/waffle-pop.png', // Change to "/waffle-pop.png.png" if the double extension bug happens!
+    fallbackImage: 'https://pngimg.com',
+    ingredients: ['Belgian Grid Waffle', 'Warm Hazelnut Nutella', 'White Chocolate Ribbons', 'Crushed M&M Candies'],
+    calories: '610 kcal',
+    isPopular: true,
+  },
+    {
+    id: 'chapati',
+    name: 'CHAPATI', // <-- Just the clean name, nothing else!
+    category: 'sides',
+    tagline: 'Hand-rolled, multi-layered golden flatbread griddled to a light flake',
+    description: 'Soft, layered, and hand-rolled traditional flatbread, griddled with clarified butter to a perfect blistering golden brown finish.',
+    price: 3.00,
+    badgeNumber: 6, // Set as the 6th item in your sides array loop
+    image: '/chapati.png', // Change to "/chapati.png.png" if the double extension happens!
+    fallbackImage: 'https://pngimg.com',
+    ingredients: ['Hand-Rolled Dough', 'Clarified Butter', 'Sea Salt'],
+    calories: '290 kcal',
+    isPopular: true,
+  },
+
 ];
 
 // Retain compatibility with existing references
